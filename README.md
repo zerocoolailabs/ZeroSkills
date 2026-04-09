@@ -32,6 +32,20 @@ EVM storage-safety vulnerability detector. Targets bugs that cause persistent st
 
 The skill runs five detection phases with explicit applicability gates. If the contract doesn't have the relevant storage patterns, it doesn't force findings. It encodes heuristics from human experience finding these bugs in production code.
 
+### Pallet Sleuth (`pallet_sleuth.md`)
+
+Substrate FRAME storage-safety vulnerability detector. Targets bugs that cause pallet state updates to be lost, raw storage writes to hit the wrong namespace, or runtime upgrades and migrations to orphan or corrupt persisted state.
+
+**What it finds:**
+
+- Read-modify-write omissions
+- Attacker-influenced raw storage key writes
+- Runtime upgrade and storage migration hazards
+- Coupled-state desynchronization across maps, counters, and indexes
+- Other storage semantics that break persistent state integrity
+
+The skill mirrors the same five-phase, gated review style as Slot Sleuth, but adapts the heuristics to Rust pallets, FRAME storage APIs, raw key access, and SCALE-encoded upgrade paths.
+
 ## Contributing
 
 Build a skill that finds real vulnerabilities, the kind that live outside the training distribution, and we'll pay you for it. [Details coming soon.]
